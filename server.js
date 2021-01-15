@@ -27,7 +27,8 @@ expressApp.post("/webhook", function (request, response, next) {
 
         agent.requestSource = agent.ACTIONS_ON_GOOGLE;
         const conv = agent.conv();
-        conv.ask('Simple responses are required before a rich response');
+        conv.ask('Here are the results for your question');
+        conv.ask('${Question}');
         conv.ask(
             new LinkOutSuggestion({
                 name: 'Click to see the results',
@@ -35,29 +36,6 @@ expressApp.post("/webhook", function (request, response, next) {
             })
         );
         agent.add(conv);
-
-
-        // agent.requestSource = agent.ACTIONS_ON_GOOGLE;
-        // const conv = agent.conv();
-        // conv.ask('Here is a basic card through fulfillment');
-        // conv.ask(
-        //     new BasicCard({
-        //         buttons: [
-        //             new Button({ title: Question, url: linkUrl }),
-        //         ],
-        //     })
-        // );
-        // agent.add(conv);
-
-
-
-        // agent.add(
-        //     new Card({
-        //         title: `${Question}`,
-        //         buttonText: "Click to see the results",
-        //         buttonUrl: linkUrl
-        //     })
-        // );
 
         console.log("Results Successfull");
 
