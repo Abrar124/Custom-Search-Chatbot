@@ -42,8 +42,24 @@ expressApp.post("/webhook", function (request, response, next) {
     }
 
     function fallback(agent) {
-        agent.add(`I didn't understand`);
-        agent.add(`I'm sorry, can you try again?`);
+        const Question = agent.parameters.question;
+        console.log("Question is:", Question);
+        const link = "http://google.com/search?q=";
+        const linkUrl = link + Question;
+
+        agent.requestSource = agent.ACTIONS_ON_GOOGLE;
+        const conv = agent.conv();
+        conv.ask('Here are the results for your question:');
+        conv.ask(`${Question}`);
+        conv.ask(
+            new LinkOutSuggestion({
+                name: 'Click to see the results',
+                url: linkUrl
+            })
+        );
+        agent.add(conv);
+
+        console.log("Results Successfull");
     }
     let intentMap = new Map();
     intentMap.set("Search", Search);
