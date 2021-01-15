@@ -23,7 +23,25 @@ expressApp.post("/webhook", function (request, response, next) {
         // agent.add(`Your search results is: ${Question}`);
         response.send({
             fulfillmentText:
-                `The Multiplication`
+                `The Multiplication`,
+            "richContent": [
+                [
+                    {
+                        "type": "button",
+                        "icon": {
+                            "type": "chevron_right",
+                            "color": "#FF9800"
+                        },
+                        "text": "Button text",
+                        "link": "https://example.com",
+                        "event": {
+                            "name": "",
+                            "languageCode": "",
+                            "parameters": {}
+                        }
+                    }
+                ]
+            ]
         });
 
         // agent.add(
