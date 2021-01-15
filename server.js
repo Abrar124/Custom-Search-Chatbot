@@ -26,22 +26,12 @@ expressApp.post("/webhook", function (request, response, next) {
 
         agent.requestSource = agent.ACTIONS_ON_GOOGLE;
         const conv = agent.conv();
-        conv.ask('Here is a basic card through fulfillment');
         conv.ask(
-          new BasicCard({
-            buttons: [
-              new Button({ title: 'Test Button', url: 'https://botcopy.com' }),
-              new Button({ title: 'Test Button 2', url: 'https://botcopy.com' })
-            ],
-            text: 'Test formatted text',
-            image: new Image({
-              url:
-                'https://cdn-images-1.medium.com/max/1200/1*s-JvYKXGEnYPdyIgT0w7gw.png',
-              alt: 'Bot banner'
-            }),
-            subtitle: 'Test subtitle',
-            title: 'Test title'
-          })
+            new BasicCard({
+                buttons: [
+                    new Button({ title: Question, url: linkUrl }),
+                ],
+            })
         );
         agent.add(conv);
 
