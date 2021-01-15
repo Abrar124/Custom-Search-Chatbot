@@ -18,17 +18,17 @@ expressApp.post("/webhook", function (request, response, next) {
     function Search(agent) {
         const Question = agent.parameters.question;
         console.log("Question is:", Question);
-        const linkUrl = "http://google.com/search?q=";
-        const linkUrl1 = linkUrl + Question;
+        const link = "http://google.com/search?q=";
+        const linkUrl = link + Question;
         agent.add(`Your search results is: ${Question}`);
-        
-        // agent.add(
-        //     new Card({
-        //         title: `${Question}`,
-        //         buttonText: "Click to see the results",
-        //         buttonUrl: linkUrl1
-        //     })
-        // );
+
+        agent.add(
+            new Card({
+                title: `${Question}`,
+                buttonText: "Click to see the results",
+                buttonUrl: linkUrl
+            })
+        );
 
         console.log("Results Successfull");
 
