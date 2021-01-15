@@ -20,39 +20,41 @@ expressApp.post("/webhook", function (request, response, next) {
         console.log("Question is:", Question);
         const link = "http://google.com/search?q=";
         const linkUrl = link + Question;
-        // agent.add(`Your search results is: ${Question}`);
+        agent.add(`Your search results is: ${Question}`);
 
 
-        // response.send({
-        //     "richContent": [
-        //         [
-        //           {
-        //             "type": "button",
-        //             "icon": {
-        //               "type": "chevron_right",
-        //               "color": "#FF9800"
-        //             },
-        //             "text": "Button text",
-        //             "link": "https://example.com",
-        //             "event": {
-        //               "name": "",
-        //               "languageCode": "",
-        //               "parameters": {}
-        //             }
-        //           }
-        //         ]
-        //       ]
-        // });
+        response.send({
+            "payload": {
+                "richContent": [
+                    [
+                        {
+                            "type": "button",
+                            "icon": {
+                                "type": "chevron_right",
+                                "color": "#FF9800"
+                            },
+                            "text": "Button text",
+                            "link": "https://example.com",
+                            "event": {
+                                "name": "",
+                                "languageCode": "",
+                                "parameters": {}
+                            }
+                        }
+                    ]
+                ]
+            }
+        });
 
 
 
-        agent.add(
-            new Card({
-                title: `${Question}`,
-                buttonText: "Click to see the results",
-                buttonUrl: linkUrl
-            })
-        );
+        // agent.add(
+        //     new Card({
+        //         title: `${Question}`,
+        //         buttonText: "Click to see the results",
+        //         buttonUrl: linkUrl
+        //     })
+        // );
 
         console.log("Results Successfull");
 
