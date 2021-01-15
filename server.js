@@ -18,9 +18,10 @@ expressApp.post("/webhook", function (request, response, next) {
     function Search(agent) {
         const Question = agent.parameters.question;
         console.log("Question is:", Question);
+
         const linkUrl = "https://www.google.com/";
-        agent.add(`results successfull`);
-        agent.add(`Your Question is: ${Question}`);
+        // agent.add(`results successfull`);
+        // agent.add(`Your Question is: ${Question}`);
 
         agent.add(
             new Card({
@@ -30,6 +31,7 @@ expressApp.post("/webhook", function (request, response, next) {
             })
         );
 
+        console.log("Results Successfull");
 
     }
 
