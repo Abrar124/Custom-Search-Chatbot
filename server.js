@@ -24,14 +24,14 @@ expressApp.post("/webhook", function (request, response, next) {
         const linkUrl = link + Question;
         // agent.add(`Your search results is: ${Question}`);
 
-        
+
         agent.requestSource = agent.ACTIONS_ON_GOOGLE;
         const conv = agent.conv();
         conv.ask('Simple responses are required before a rich response');
         conv.ask(
             new LinkOutSuggestion({
-                name: 'Title of Link Out',
-                url: 'https://botcopy.com'
+                name: 'Click to see the results',
+                url: linkUrl
             })
         );
         agent.add(conv);
