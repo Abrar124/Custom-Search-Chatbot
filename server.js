@@ -22,13 +22,35 @@ expressApp.post("/webhook", function (request, response, next) {
         const linkUrl = link + Question;
         // agent.add(`Your search results is: ${Question}`);
 
-        agent.add(
-            new Card({
-                title: `${Question}`,
-                buttonText: "Click to see the results",
-                buttonUrl: linkUrl
-            })
-        );
+
+        response.send({
+            fulfillmentText:
+                `The Substraction`,
+            "fulfillmentMessages": [
+                {
+                    "card": {
+                        "title": "hi",
+                        "buttons": [
+                            {
+                                "text": "Click to see the results",
+                                "postback": "http://google.com/search?q=hi"
+                            }
+                        ]
+                    }
+                }
+            ],
+            "outputContexts": []
+        });
+
+
+
+        // agent.add(
+        //     new Card({
+        //         title: `${Question}`,
+        //         buttonText: "Click to see the results",
+        //         buttonUrl: linkUrl
+        //     })
+        // );
 
         console.log("Results Successfull");
 
