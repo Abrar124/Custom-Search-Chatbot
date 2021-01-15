@@ -20,7 +20,7 @@ expressApp.post("/webhook", function (request, response, next) {
         console.log("Question is:", Question);
         const link = "http://google.com/search?q=";
         const linkUrl = link + Question;
-        agent.add(`Your search results is: ${Question}`);
+        // agent.add(`Your search results is: ${Question}`);
 
         agent.add(
             new Card({
