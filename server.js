@@ -18,13 +18,15 @@ expressApp.post("/webhook", function (request, response, next) {
     function Search(agent) {
         const Question = agent.parameters.question;
         console.log("Question is:", Question);
-        const linkUrl = "http://google.com/search?q='+ Question";
+        const linkUrl = "http://google.com/search?q=";
+        const linkUrl1 = linkUrl + Question;
+
         
         agent.add(
             new Card({
                 title: `${Question}`,
                 buttonText: "Click to see the results",
-                buttonUrl: linkUrl
+                buttonUrl: linkUrl1
             })
         );
 
