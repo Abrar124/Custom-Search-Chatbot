@@ -24,8 +24,7 @@ expressApp.post("/webhook", function (request, response, next) {
 
         agent.add(
             new Card({
-                title: `Results`,
-                text: `${Question}`,
+                title: `${Question}`,
                 buttonText: "Click to see the results",
                 buttonUrl: linkUrl
             })
