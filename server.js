@@ -16,10 +16,10 @@ expressApp.post("/webhook", function (request, response, next) {
     }
 
     function Search(agent) {
-        const name = agent.parameters.question;
-        console.log(name);
+        const Question = agent.parameters.question;
+        console.log("Question is:", Question);
         agent.add(`results successfull`);
-        // agent.add(`results successfull`);
+        agent.add(`Your Question is: ${Question}`);
 
     }
 
