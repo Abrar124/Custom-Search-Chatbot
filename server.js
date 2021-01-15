@@ -27,8 +27,8 @@ expressApp.post("/webhook", function (request, response, next) {
 
         agent.requestSource = agent.ACTIONS_ON_GOOGLE;
         const conv = agent.conv();
-        conv.ask('Here are the results for your question');
-        conv.ask('${Question}');
+        conv.ask('Here are the results for your question:');
+        conv.ask(`${Question}`);
         conv.ask(
             new LinkOutSuggestion({
                 name: 'Click to see the results',
