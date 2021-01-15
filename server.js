@@ -16,14 +16,20 @@ expressApp.post("/webhook", function (request, response, next) {
 
     }
 
+    function Search(agent) {
+        const name = agent.parameters.User_Query;
+        console.log(User_Query);
+        agent.add(`results successfull`);
+    }
+
     function fallback(agent) {
         agent.add(`I didn't understand`);
         agent.add(`I'm sorry, can you try again?`);
     }
     let intentMap = new Map();
+    intentMap.set("Search", Search);
     intentMap.set("Default Welcome Intent", welcome);
     intentMap.set("Default Fallback Intent", fallback);
-
     agent.handleRequest(intentMap);
 
 });
