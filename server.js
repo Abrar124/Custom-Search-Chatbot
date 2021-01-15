@@ -1,10 +1,9 @@
 const express = require("express");
 const bodyParser = require("body-parser");
+const { Card, Suggestion } = require("dialogflow-fulfillment");
 var request = require("request");
 
 const { WebhookClient } = require("dialogflow-fulfillment");
-
-
 const expressApp = express().use(bodyParser.json());
 
 expressApp.post("/webhook", function (request, response, next) {
@@ -17,9 +16,11 @@ expressApp.post("/webhook", function (request, response, next) {
     }
 
     function Search(agent) {
-        const name = agent.parameters.User_Query;
-        console.log(User_Query);
+        const name = agent.parameters.question;
+        console.log(name);
         agent.add(`results successfull`);
+        // agent.add(`results successfull`);
+
     }
 
     function fallback(agent) {
