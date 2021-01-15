@@ -26,6 +26,7 @@ expressApp.post("/webhook", function (request, response, next) {
 
         agent.requestSource = agent.ACTIONS_ON_GOOGLE;
         const conv = agent.conv();
+        conv.ask('Here is a basic card through fulfillment');
         conv.ask(
             new BasicCard({
                 buttons: [
