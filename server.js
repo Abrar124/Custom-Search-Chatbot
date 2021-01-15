@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const { Card, Suggestion } = require("dialogflow-fulfillment");
+const { BasicCard, Button, Image } = require('actions-on-google')
 var request = require("request");
 
 const { WebhookClient } = require("dialogflow-fulfillment");
@@ -23,36 +24,36 @@ expressApp.post("/webhook", function (request, response, next) {
         // agent.add(`Your search results is: ${Question}`);
 
 
-        // response.send({
-        //     "richContent": [
-        //         [
-        //           {
-        //             "type": "button",
-        //             "icon": {
-        //               "type": "chevron_right",
-        //               "color": "#FF9800"
-        //             },
-        //             "text": "Button text",
-        //             "link": "https://example.com",
-        //             "event": {
-        //               "name": "",
-        //               "languageCode": "",
-        //               "parameters": {}
-        //             }
-        //           }
-        //         ]
-        //       ]
-        // });
-
-
-
-        agent.add(
-            new Card({
-                title: `${Question}`,
-                buttonText: "Click to see the results",
-                buttonUrl: linkUrl
-            })
+        agent.requestSource = agent.ACTIONS_ON_GOOGLE;
+        const conv = agent.conv();
+        conv.ask('Here is a basic card through fulfillment');
+        conv.ask(
+          new BasicCard({
+            buttons: [
+              new Button({ title: 'Test Button', url: 'https://botcopy.com' }),
+              new Button({ title: 'Test Button 2', url: 'https://botcopy.com' })
+            ],
+            text: 'Test formatted text',
+            image: new Image({
+              url:
+                'https://cdn-images-1.medium.com/max/1200/1*s-JvYKXGEnYPdyIgT0w7gw.png',
+              alt: 'Bot banner'
+            }),
+            subtitle: 'Test subtitle',
+            title: 'Test title'
+          })
         );
+        agent.add(conv);
+
+
+
+        // agent.add(
+        //     new Card({
+        //         title: `${Question}`,
+        //         buttonText: "Click to see the results",
+        //         buttonUrl: linkUrl
+        //     })
+        // );
 
         console.log("Results Successfull");
 
