@@ -20,9 +20,8 @@ expressApp.post("/webhook", function (request, response, next) {
         console.log("Question is:", Question);
         const linkUrl = "http://google.com/search?q=";
         const linkUrl1 = linkUrl + Question;
-        // agent.add(`Your search results is: ${Question}`);
-        agent.add(new Suggestion(`Basic room`));
-        agent.add(new Suggestion(`Standard room`));
+        agent.add(`Your search results is: ${Question}`);
+        
         // agent.add(
         //     new Card({
         //         title: `${Question}`,
