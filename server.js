@@ -11,7 +11,9 @@ expressApp.post("/webhook", function (request, response, next) {
     const agent = new WebhookClient({ request: request, response: response });
 
     function welcome(agent) {
-        agent.add(`Good day! What can I do for you today?`);
+        agent.add(`Welcome to custom search.`);
+        agent.add(`What can I search for you today?`);
+
     }
 
     function fallback(agent) {
