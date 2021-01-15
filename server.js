@@ -1,7 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const { Card, Suggestion } = require("dialogflow-fulfillment");
-const { BasicCard, Button, Image } = require('actions-on-google')
+const { BasicCard, Button, Image } = require('actions-on-google');
+const { LinkOutSuggestion } = require('actions-on-google')
 var request = require("request");
 
 const { WebhookClient } = require("dialogflow-fulfillment");
@@ -23,18 +24,30 @@ expressApp.post("/webhook", function (request, response, next) {
         const linkUrl = link + Question;
         // agent.add(`Your search results is: ${Question}`);
 
-
+        
         agent.requestSource = agent.ACTIONS_ON_GOOGLE;
         const conv = agent.conv();
-        conv.ask('Here is a basic card through fulfillment');
+        conv.ask('Simple responses are required before a rich response');
         conv.ask(
-            new BasicCard({
-                buttons: [
-                    new Button({ title: Question, url: linkUrl }),
-                ],
+            new LinkOutSuggestion({
+                name: 'Title of Link Out',
+                url: 'https://botcopy.com'
             })
         );
         agent.add(conv);
+
+
+        // agent.requestSource = agent.ACTIONS_ON_GOOGLE;
+        // const conv = agent.conv();
+        // conv.ask('Here is a basic card through fulfillment');
+        // conv.ask(
+        //     new BasicCard({
+        //         buttons: [
+        //             new Button({ title: Question, url: linkUrl }),
+        //         ],
+        //     })
+        // );
+        // agent.add(conv);
 
 
 
