@@ -24,22 +24,24 @@ expressApp.post("/webhook", function (request, response, next) {
 
 
         response.send({
-            fulfillmentText:
-                `The Substraction`,
-            "fulfillmentMessages": [
-                {
-                    "card": {
-                        "title": Question,
-                        "buttons": [
-                            {
-                                "text": "Click to see the results",
-                                "postback": linkUrl
-                            }
-                        ]
+            "richContent": [
+                [
+                  {
+                    "type": "button",
+                    "icon": {
+                      "type": "chevron_right",
+                      "color": "#FF9800"
+                    },
+                    "text": "Button text",
+                    "link": "https://example.com",
+                    "event": {
+                      "name": "",
+                      "languageCode": "",
+                      "parameters": {}
                     }
-                }
-            ],
-            "outputContexts": []
+                  }
+                ]
+              ]
         });
 
 
