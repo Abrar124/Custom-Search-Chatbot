@@ -29,11 +29,11 @@ expressApp.post("/webhook", function (request, response, next) {
             "fulfillmentMessages": [
                 {
                     "card": {
-                        "title": "hi",
+                        "title": Question,
                         "buttons": [
                             {
                                 "text": "Click to see the results",
-                                "postback": "http://google.com/search?q=hi"
+                                "postback": linkUrl
                             }
                         ]
                     }
