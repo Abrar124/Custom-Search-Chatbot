@@ -25,14 +25,14 @@ expressApp.post("/webhook", function (request, response, next) {
             fulfillmentText:
                 `The Multiplication`
         });
-        
-        agent.add(
-            new Card({
-                title: `${Question}`,
-                buttonText: "Click to see the results",
-                buttonUrl: linkUrl
-            })
-        );
+
+        // agent.add(
+        //     new Card({
+        //         title: `${Question}`,
+        //         buttonText: "Click to see the results",
+        //         buttonUrl: linkUrl
+        //     })
+        // );
 
         console.log("Results Successfull");
 
