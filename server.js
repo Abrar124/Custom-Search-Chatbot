@@ -22,8 +22,6 @@ expressApp.post("/webhook", function (request, response, next) {
         const linkUrl = link + Question;
         // agent.add(`Your search results is: ${Question}`);
         response.send({
-            fulfillmentText:
-                `The Multiplication`,
             "richContent": [
                 [
                     {
