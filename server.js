@@ -23,42 +23,44 @@ expressApp.post("/webhook", function (request, response, next) {
         console.log("Question is:", Question);
         const link = "http://google.com/search?q=";
         const linkUrl = link + Question;
-        // agent.add(`Your search results is: ${Question}`);
+
         agent.add(`Here are the results for your question:`);
         agent.add(`${Question}`);
 
-        
+
         let payload = {
             "richContent": [
                 [
-                  {
-                    "type": "button",
-                    "icon": {
-                      "type": "chevron_right",
-                      "color": "#FF9800"
-                    },
-                    "text": "Click to see the results",
-                    "link": linkUrl,
-                    "event": {
-                      "name": "",
-                      "languageCode": "",
-                      "parameters": {}
+                    {
+                        "type": "button",
+                        "icon": {
+                            "type": "chevron_right",
+                            "color": "#FF9800"
+                        },
+                        "text": "Click to see the results",
+                        "link": linkUrl,
+                        "event": {
+                            "name": "",
+                            "languageCode": "",
+                            "parameters": {}
+                        }
                     }
-                  }
                 ]
-              ]
+            ]
         }
-    
+
         agent.add(new Payload(agent.UNSPECIFIED, payload, { sendAsMessage: true, rawPayload: true }))
-    
+        console.log("Results Successfull");
+
+
+        // Payload Fullfilment
         // let params = {
         //     current_intent_name: "Search"
         // }
-    
         // Context.setContext(agent, params)
 
 
-        
+        // Dialogflow Google Assistant fullfilment
         // agent.requestSource = agent.ACTIONS_ON_GOOGLE;
         // const conv = agent.conv();
         // conv.ask('Here are the results for your question:');
@@ -76,24 +78,8 @@ expressApp.post("/webhook", function (request, response, next) {
     }
 
     function fallback(agent) {
-        const Question = agent.parameters.question;
-        console.log("Question is:", Question);
-        const link = "http://google.com/search?q=";
-        const linkUrl = link + Question;
+        agent.add(`Sorry I didn't get it`);
 
-        agent.requestSource = agent.ACTIONS_ON_GOOGLE;
-        const conv = agent.conv();
-        conv.ask('Here are the results for your question:');
-        conv.ask(`${Question}`);
-        conv.ask(
-            new LinkOutSuggestion({
-                name: 'Click to see the results',
-                url: linkUrl
-            })
-        );
-        agent.add(conv);
-
-        console.log("Results Successfull");
     }
     let intentMap = new Map();
     intentMap.set("Search", Search);
