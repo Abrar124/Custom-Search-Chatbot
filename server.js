@@ -58,11 +58,11 @@ expressApp.post("/webhook", function (request, response, next) {
     
         agent.add(new Payload(agent.UNSPECIFIED, payload, { sendAsMessage: true, rawPayload: true }))
     
-        let params = {
-            current_intent_name: "Search"
-        }
+        // let params = {
+        //     current_intent_name: "Search"
+        // }
     
-        Context.setContext(agent, params)
+        // Context.setContext(agent, params)
 
 
         
@@ -103,7 +103,7 @@ expressApp.post("/webhook", function (request, response, next) {
         console.log("Results Successfull");
     }
     let intentMap = new Map();
-    // intentMap.set("Search", Search);
+    intentMap.set("Search", Search);
     intentMap.set("Default Welcome Intent", welcome);
     intentMap.set("Default Fallback Intent", fallback);
     agent.handleRequest(intentMap);
