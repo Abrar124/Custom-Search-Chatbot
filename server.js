@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 const { Card, Suggestion } = require("dialogflow-fulfillment");
+const { Payload } = require('dialogflow-fulfillment');
 const { BasicCard, Button, Image } = require('actions-on-google');
 const { LinkOutSuggestion } = require('actions-on-google')
 var request = require("request");
@@ -25,19 +26,59 @@ expressApp.post("/webhook", function (request, response, next) {
         // agent.add(`Your search results is: ${Question}`);
 
 
-        agent.requestSource = agent.ACTIONS_ON_GOOGLE;
-        const conv = agent.conv();
-        conv.ask('Here are the results for your question:');
-        conv.ask(`${Question}`);
-        conv.ask(
-            new LinkOutSuggestion({
-                name: 'Click to see the results',
-                url: linkUrl
-            })
-        );
-        agent.add(conv);
+        let payload = {
+            "richContent": [
+                [
+                    {
+                        "type": "image",
+                        "rawUrl": "https://galaxymedicalstaffing.com/wp-content/uploads/2020/07/Final-Files-01.png"
+                    },
+                    {
+                        "subtitle": "What best describes you (Please select one of these 3 options)",
+                        "type": "info",
+                        "title": "Welcome to Galaxy Medical Staffing"
+                    },
+                    {
+                        "options": [
+                            {
+                                "text": " I am a healthcare provider looking for a job"
+                            },
+                            {
+                                "text": "I need to hire healthcare providers"
+                            },
+                            {
+                                "text": "I need information about locum tenens"
+                            }
+                        ],
+                        "type": "chips"
+                    }
+                ]
+            ]
+        }
+    
+        agent.add(new Payload(agent.UNSPECIFIED, payload, { sendAsMessage: true, rawPayload: true }))
+    
+        let params = {
+            current_intent_name: "Search"
+        }
+    
+        Context.setContext(agent, params)
 
-        console.log("Results Successfull");
+
+        
+        // agent.requestSource = agent.ACTIONS_ON_GOOGLE;
+        // const conv = agent.conv();
+        // conv.ask('Here are the results for your question:');
+        // conv.ask(`${Question}`);
+        // conv.ask(
+        //     new LinkOutSuggestion({
+        //         name: 'Click to see the results',
+        //         url: linkUrl
+        //     })
+        // );
+        // agent.add(conv);
+
+        // console.log("Results Successfull");
 
     }
 
@@ -62,7 +103,7 @@ expressApp.post("/webhook", function (request, response, next) {
         console.log("Results Successfull");
     }
     let intentMap = new Map();
-    intentMap.set("Search", Search);
+    // intentMap.set("Search", Search);
     intentMap.set("Default Welcome Intent", welcome);
     intentMap.set("Default Fallback Intent", fallback);
     agent.handleRequest(intentMap);
