@@ -29,22 +29,22 @@ expressApp.post("/webhook", function (request, response, next) {
         let payload = {
             "richContent": [
                 [
-                    {
-                        "title": "Thank you. One of our representatives",
-                        "subtitle": "To check our latest blog articles, please click here:",
-                        "type": "accordion"
+                  {
+                    "type": "button",
+                    "icon": {
+                      "type": "chevron_right",
+                      "color": "#FF9800"
                     },
-                    {
-                        "options": [
-                            {
-                                "text": "https://galaxymedicalstaffing.com/blog/",
-                                "link": "https://galaxymedicalstaffing.com/blog/"
-                            }
-                        ],
-                        "type": "chips"
+                    "text": "Button text",
+                    "link": "https://example.com",
+                    "event": {
+                      "name": "",
+                      "languageCode": "",
+                      "parameters": {}
                     }
+                  }
                 ]
-            ]
+              ]
         }
     
         agent.add(new Payload(agent.UNSPECIFIED, payload, { sendAsMessage: true, rawPayload: true }))
