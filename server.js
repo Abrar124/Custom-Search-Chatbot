@@ -30,24 +30,15 @@ expressApp.post("/webhook", function (request, response, next) {
             "richContent": [
                 [
                     {
-                        "type": "image",
-                        "rawUrl": "https://galaxymedicalstaffing.com/wp-content/uploads/2020/07/Final-Files-01.png"
-                    },
-                    {
-                        "subtitle": "What best describes you (Please select one of these 3 options)",
-                        "type": "info",
-                        "title": "Welcome to Galaxy Medical Staffing"
+                        "title": "Thank you. One of our representatives",
+                        "subtitle": "To check our latest blog articles, please click here:",
+                        "type": "accordion"
                     },
                     {
                         "options": [
                             {
-                                "text": " I am a healthcare provider looking for a job"
-                            },
-                            {
-                                "text": "I need to hire healthcare providers"
-                            },
-                            {
-                                "text": "I need information about locum tenens"
+                                "text": "https://galaxymedicalstaffing.com/blog/",
+                                "link": "https://galaxymedicalstaffing.com/blog/"
                             }
                         ],
                         "type": "chips"
