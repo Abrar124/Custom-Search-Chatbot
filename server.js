@@ -24,8 +24,10 @@ expressApp.post("/webhook", function (request, response, next) {
         const link = "http://google.com/search?q=";
         const linkUrl = link + Question;
         // agent.add(`Your search results is: ${Question}`);
+        agent.add(`Here are the results for your question:`);
+        agent.add(`${Question}`);
 
-
+        
         let payload = {
             "richContent": [
                 [
@@ -35,8 +37,8 @@ expressApp.post("/webhook", function (request, response, next) {
                       "type": "chevron_right",
                       "color": "#FF9800"
                     },
-                    "text": "Button text",
-                    "link": "https://example.com",
+                    "text": "Click to see the results",
+                    "link": linkUrl,
                     "event": {
                       "name": "",
                       "languageCode": "",
